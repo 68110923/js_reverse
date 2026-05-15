@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>寻龙诀 v4.1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#050508;color:#c8c4be;font-family:'PingFang SC','Noto Sans SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+main{width:393px;height:852px;margin:0 auto;display:flex;flex-direction:column;padding:45px 16px 16px;position:relative;overflow:hidden}
+.bg-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(ellipse,rgba(212,168,83,.08) 0%,transparent 70%);pointer-events:none;z-index:0}
+section,header,footer{position:relative;z-index:1}
+
+/* 顶部 */
+header{text-align:center;margin-bottom:14px}
+.dragon{font-size:22px;line-height:1;margin-bottom:6px}
+h1{font-size:28px;font-weight:900;letter-spacing:8px;background:linear-gradient(180deg,#fdf0d5 0%,#d4a853 40%,#8a6d30 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.tag{display:inline-block;margin-top:8px;background:linear-gradient(135deg,#d4a85318,#d4a85306);border:1px solid #d4a85322;border-radius:20px;padding:1px 12px;font-size:9px;color:#d4a853;letter-spacing:2px}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:14px}
+.hero .big{font-size:64px;font-weight:900;background:linear-gradient(180deg,#e53935,#ff7043);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:.95;letter-spacing:-5px}
+.hero .unit{font-size:26px;font-weight:700;color:#e53935;vertical-align:super}
+.hero .lbl{font-size:10px;color:#d4a853;letter-spacing:2px;font-weight:700;margin-top:-3px}
+.hero .sub{font-size:9px;color:#5a5652;margin-top:1px}
+
+/* 数据卡片 */
+.cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:14px}
+.card{background:linear-gradient(180deg,#0e0e18,#0a0a14);border:1px solid #1a1a28;border-radius:8px;padding:12px 6px;text-align:center}
+.card .val{font-size:20px;font-weight:900;line-height:1.1}
+.card .val.red{color:#e53935}
+.card .val.gold{color:#d4a853}
+.card .val.wht{color:#e0dcd8}
+.card .lbl{font-size:8px;color:#5a5652;margin-top:2px}
+
+/* 月份柱状图 */
+.months{background:linear-gradient(180deg,#0e0e18,#0a0a14);border:1px solid #1a1a28;border-radius:8px;padding:12px 14px;margin-bottom:14px}
+.months h3{font-size:9px;color:#908c88;text-align:center;letter-spacing:2px;margin-bottom:3px;font-weight:700}
+.month-row{display:flex;align-items:center;gap:5px;padding:1px 0;font-size:9px}
+.month-row .label{width:28px;color:#908c88;text-align:right}
+.month-row .bar-wrap{flex:1;height:12px;background:#111118;border-radius:6px;overflow:hidden}
+.month-row .bar-fill{height:100%;border-radius:6px}
+.month-row .bar-fill.gold{background:linear-gradient(90deg,#8a6d30,#d4a853)}
+.month-row .bar-fill.green{background:linear-gradient(90deg,#2e7d32,#66bb6a)}
+.month-row .bar-fill.orange{background:linear-gradient(90deg,#e65100,#ff9800)}
+.month-row .pct{width:30px;text-align:right;font-weight:700;font-size:9px}
+
+/* 亮点 */
+.highlight{background:linear-gradient(135deg,#0e0e18,#111118);border:1px solid #d4a85322;border-radius:8px;padding:8px;display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.highlight .icon{font-size:22px;flex-shrink:0}
+.highlight .txt{font-size:9px;color:#908c88;line-height:1.5}
+.highlight .txt b{color:#d4a853;font-weight:700}
+
+/* 分隔线 */
+.divider{height:1px;background:linear-gradient(90deg,transparent,#d4a85320,transparent);margin:18px 0}
+
+/* 系统机制 */
+.sys-label{text-align:center;font-size:9px;color:#5a5652;letter-spacing:2px;margin-bottom:14px}
+.mechanism{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.mech{background:linear-gradient(180deg,#0e0e18,#0a0a14);border:1px solid #1a1a28;border-radius:8px;padding:8px 5px;text-align:center}
+.mech .time{font-size:13px;font-weight:900;line-height:1;margin-bottom:3px}
+.mech .time.red{color:#e53935}
+.mech .time.gold{color:#d4a853}
+.mech .time.pulse{animation:pulse 2s infinite}
+.mech .act{font-size:9px;font-weight:700;color:#c8c4be;margin-bottom:1px}
+.mech .desc{font-size:8px;color:#5a5652;line-height:1.3}
+
+/* 底部 */
+footer{text-align:center;margin-top:20px}
+footer .brand{font-size:12px;font-weight:900;background:linear-gradient(135deg,#8a6d30,#d4a853);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+footer .risk{font-size:8px;color:#5a5652;margin-top:2px;line-height:1.4}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+<main>
+
+  <header>
+    <div class="dragon">🐉</div>
+    <h1>寻 龙 诀</h1>
+    <div class="tag">一进二竞价量化系统 · v4.1</div>
+  </header>
+
+  <!-- ═══ 70% 一进二核心 ═══ -->
+  <div class="hero">
+    <div class="big">69.8<span class="unit">%</span></div>
+    <div class="lbl">八个月全量回测综合胜率69.8%，有效胜率58%</div>
+    <div class="sub">2128 只首板样本 · 2025.10 – 2026.05</div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="val red">70%</div>
+      <div class="lbl">近三个月胜率</div>
+    </div>
+    <div class="card">
+      <div class="val gold">7.7</div>
+      <div class="lbl">周均推送只数</div>
+    </div>
+    <div class="card">
+      <div class="val wht">≤3</div>
+      <div class="lbl">每日精选上限</div>
+    </div>
+  </div>
+
+  <div class="months">
+    <h3>月度有效胜率追踪</h3>
+    <div class="month-row"><div class="label">10月</div><div class="bar-wrap"><div class="bar-fill gold" style="width:46%"></div></div><div class="pct" style="color:#d4a853">46%</div></div>
+    <div class="month-row"><div class="label">11月</div><div class="bar-wrap"><div class="bar-fill gold" style="width:57%"></div></div><div class="pct" style="color:#d4a853">57%</div></div>
+    <div class="month-row"><div class="label">12月</div><div class="bar-wrap"><div class="bar-fill green" style="width:71%"></div></div><div class="pct" style="color:#66bb6a">71%</div></div>
+    <div class="month-row"><div class="label">1月</div><div class="bar-wrap"><div class="bar-fill orange" style="width:35%"></div></div><div class="pct" style="color:#ff9800">35%</div></div>
+    <div class="month-row"><div class="label">2月</div><div class="bar-wrap"><div class="bar-fill gold" style="width:53%"></div></div><div class="pct" style="color:#d4a853">53%</div></div>
+    <div class="month-row"><div class="label">3月</div><div class="bar-wrap"><div class="bar-fill green" style="width:70%"></div></div><div class="pct" style="color:#66bb6a">70%</div></div>
+    <div class="month-row"><div class="label">4月</div><div class="bar-wrap"><div class="bar-fill green" style="width:71%"></div></div><div class="pct" style="color:#66bb6a">71%</div></div>
+    <div class="month-row"><div class="label">5月</div><div class="bar-wrap"><div class="bar-fill green" style="width:67%"></div></div><div class="pct" style="color:#66bb6a">67%</div></div>
+  </div>
+
+  <div class="highlight">
+    <div class="icon">🔥</div>
+    <div class="txt">近三月 <b>70%</b> 有效胜率 · 12月/4月双双 <b>71%</b> · 7/8 月超基准线</div>
+  </div>
+
+  <!-- ═══ 分隔 ═══ -->
+  <div class="divider"></div>
+
+  <!-- ═══ 30% 系统机制 ═══ -->
+  <div class="sys-label">⚙ 全自动闭环系统</div>
+
+  <div class="mechanism">
+    <div class="mech">
+      <div class="time red">9:26</div>
+      <div class="act">一进二选股</div>
+      <div class="desc">12道硬闸过滤<br>软排评分≤3只</div>
+    </div>
+    <div class="mech">
+      <div class="time gold pulse">15:20</div>
+      <div class="act">大盘预测</div>
+      <div class="desc">四层叠buff<br>次日信号输出</div>
+    </div>
+    <div class="mech">
+      <div class="time" style="color:#c8c4be">15:30</div>
+      <div class="act">复盘进化</div>
+      <div class="desc">收盘数据入库<br>持续自优化</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="brand">🐉 寻龙诀 v4.1</div>
+    <div class="risk">⚠️ 仅供学习研究 · 不构成投资建议 · 股市有风险</div>
+  </footer>
+
+</main>
+</body>
+</html>
